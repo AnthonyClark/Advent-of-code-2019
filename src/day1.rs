@@ -7,9 +7,7 @@ pub fn part1_weights(input: &str) -> Vec<i32> {
 
 #[aoc(day1, part1, withGen)]
 pub fn part1_fuel(weights: &[i32]) -> i32 {
-  weights.iter().map(|w| {
-    (w / 3) - 2
-  }).sum()
+  weights.iter().map(|w| {fuel_for_weight(*w)}).sum()
 }
 
 #[aoc(day1, part1, noGen)]
@@ -27,11 +25,7 @@ pub fn part2(input: &str) -> i32 {
 }
 
 fn fuel_for_weight(input: i32) -> i32 {
-  let fuel = input / 3 - 2;
-  match fuel {
-    0..=std::i32::MAX => fuel,
-    _ => 0,
-  }
+  return std::cmp::max(input / 3 - 2, 0);
 }
 
 fn total_fuel_for_module(input: i32) -> i32 {
