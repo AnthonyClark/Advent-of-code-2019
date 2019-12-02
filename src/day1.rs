@@ -1,27 +1,29 @@
 #[aoc_generator(day1, part1, withGen)]
 pub fn part1_weights(input: &str) -> Vec<i32> {
-  input.lines().map(|l| {
-    l.parse::<i32>().unwrap()
-  }).collect()
+  input.lines().map(|l| l.parse().unwrap()).collect()
 }
 
 #[aoc(day1, part1, withGen)]
 pub fn part1_fuel(weights: &[i32]) -> i32 {
-  weights.iter().map(|w| {fuel_for_weight(*w)}).sum()
+  weights.iter().map(|w| fuel_for_weight(*w)).sum()
 }
 
 #[aoc(day1, part1, noGen)]
 pub fn part1_shorter(input: &str) -> i32 {
-  input.lines().map(|l| {
-    fuel_for_weight(l.parse::<i32>().unwrap())
-  }).sum()
+  input
+    .lines()
+    .map(|l| l.parse().unwrap())
+    .map(fuel_for_weight)
+    .sum()
 }
 
 #[aoc(day1, part2)]
 pub fn part2(input: &str) -> i32 {
-  input.lines().map(|l| {
-    total_fuel_for_module(l.parse::<i32>().unwrap())
-  }).sum()
+  input
+    .lines()
+    .map(|l| l.parse().unwrap())
+    .map(total_fuel_for_module)
+    .sum()
 }
 
 fn fuel_for_weight(input: i32) -> i32 {
@@ -40,14 +42,13 @@ fn total_fuel_for_module(input: i32) -> i32 {
   return w1 + w2;
 }
 
-
 #[cfg(test)]
 mod tests {
   use crate::day1::fuel_for_weight;
 
   #[test]
   fn rust_divison() {
-    assert_eq!((3/2), 1);
+    assert_eq!((3 / 2), 1);
   }
 
   #[test]
